@@ -1,0 +1,44 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.dayBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: antiquewhite;
+  width: 350px;
+  height: fit-content;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 25px;
+  min-height: 250px;
+}
+
+.day {
+  margin: 25px 0px 75px 0px;
+}
+
+button {
+  background-color: transparent;
+}
+
+.addButton {
+  font-size: larger;
+}
+
+input[type='text'] {
+  background-color: transparent;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+}
