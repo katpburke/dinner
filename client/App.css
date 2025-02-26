@@ -103,6 +103,10 @@ select {
   list-style-type: none;
 }
 
+.listBox {
+  border-bottom: solid black 3px;
+}
+
 .shoppingItem {
   width: fit-content;
   margin-left: 550px;

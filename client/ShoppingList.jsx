@@ -5,7 +5,7 @@ const urlPantry = 'http://localhost:3000/pantry';
 function ShoppingList({ stateChange, updatePantry, pantryList }) {
   //get and display all ingredients needed
   const [displayList, updateDisplay] = useState([]);
-  //   const [pantryList, updatePantry] = useState({});
+  const [print, updatePrint] = useState(false);
   const inStock = {
     have: 'low',
     low: 'need',
@@ -45,24 +45,56 @@ function ShoppingList({ stateChange, updatePantry, pantryList }) {
         body: JSON.stringify({ item: item, amount: pantryList[item] }),
       }).then(console.log(`${item} updated in pantry.`));
     }
-    stateChange(false);
+    // stateChange(false);
   }
 
   return (
     <div>
-      <div>
-        <h4>Here are the things you need to make dinner this week:</h4>
-        <div className='listBox'>
-          {displayList.map((el) => (
-            <button onClick={() => cycleItem(el)}>
-              {el} ({pantryList[el]})
+      {!print && (
+        <div>
+          <div>
+            <h4>Here are the things you need to make dinner this week:</h4>
+            <div className='listBox'>
+              {displayList.map((el) => (
+                <button onClick={() => cycleItem(el)}>
+                  {el} ({pantryList[el]})
+                </button>
+              ))}
+            </div>
+          </div>
+          <div> </div>
+          <div>
+            <button
+              onClick={() => {
+                pantryUpdate();
+                stateChange(false);
+              }}
+            >
+              Update Pantry
             </button>
-          ))}
+            <button
+              onClick={() => {
+                pantryUpdate();
+                updatePrint(true);
+              }}
+            >
+              Print List
+            </button>
+          </div>
         </div>
-      </div>
-      <div>
-        <button onClick={pantryUpdate}>Update Pantry</button>
-      </div>
+      )}
+      {print && (
+        <div>
+          <h4>You need to buy:</h4>
+          <ul className='shoppingList'>
+            {displayList.map((el) => {
+              if (pantryList[el] === 'need') {
+                return <li className='shoppingItem'>{el}</li>;
+              }
+            })}
+          </ul>
+        </div>
+      )}
       <div>
         <button onClick={() => stateChange(false)}>Close</button>
       </div>
