@@ -4,16 +4,23 @@ import express from 'express';
 import dinnerController from './controllers/dinnerController.js';
 import CORS from 'cors';
 import recipeController from './controllers/recipeController.js';
+import pantryController from './controllers/pantryController.js';
 
 const app = express();
 const PORT = 3000;
 const __dirname = path.resolve();
 
+const corsOptions = {
+  origin: '*',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
 app.use(express.static(path.join(__dirname, 'client')));
 // app.use('/client', express.static(path.join(__dirname, '../client')));
 // app.use('/', express.static(path.resolve(__dirname, '../')));
 app.use(express.json());
-app.use(CORS());
+app.use(CORS(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 
 // app.get('/', (req, res) => {
@@ -52,6 +59,14 @@ app.get('/recipes/:name', recipeController.getRecipes, (req, res) => {
 
 app.get('/recipes', recipeController.getRecipes, (req, res) => {
   res.status(200).json(res.locals.recipes);
+});
+
+app.patch('/pantry', pantryController.update, (req, res) => {
+  res.status(200).json(res.locals.item);
+});
+
+app.get('/pantry', pantryController.get, (req, res) => {
+  res.status(200).json(res.locals.pantry);
 });
 
 app.use((req, res) => res.status(404).send('Page not found.'));

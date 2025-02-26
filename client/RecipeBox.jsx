@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Recipe from './Recipe.jsx';
 
-function RecipeBox({ stateChange, refreshChange }) {
+function RecipeBox({ stateChange, refreshChange, passedFromPantry }) {
   const [displayed, displayChange] = useState(false);
   const [recipes, loadRecipes] = useState([]);
   const [seeRecipes, updateVisibleRecipes] = useState([]);
@@ -9,6 +9,14 @@ function RecipeBox({ stateChange, refreshChange }) {
   let url = 'http://localhost:3000/recipes';
 
   let results = [];
+
+  useEffect(()=>{
+    if (passedFromPantry) {
+      console.log('we came here from the pantry!');
+      handleSearch(passedFromPantry);
+      displayChange(true);
+    }
+  }, [])
 
   function handleSearch(name) {
     url += `/${name.toLowerCase()}`;

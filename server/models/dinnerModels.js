@@ -31,4 +31,11 @@ const recipeSchema = new Schema({
 
 const Recipe = mongoose.model('recipe', recipeSchema);
 
-export { Dinner, Recipe };
+const pantrySchema = new Schema({
+  item: String,
+  amount: String,
+});
+
+const Pantry = mongoose.model('pantry', pantrySchema);
+
+export { Dinner, Recipe, Pantry };

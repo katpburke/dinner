@@ -89,6 +89,7 @@ input[type='text'] {
   border-top-style: none;
   border-left-style: none;
   border-right-style: none;
+  width: 300px;
 }
 
 select {
@@ -96,9 +97,13 @@ select {
   border-top-style: none;
   border-left-style: none;
   border-right-style: none;
-  /* margin-right: 25px; */
 }
 
 .shoppingList {
   list-style-type: none;
+}
+
+.shoppingItem {
+  width: fit-content;
+  margin-left: 550px;
 }
