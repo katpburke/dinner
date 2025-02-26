@@ -42,6 +42,7 @@ dinnerController.updateDinner = async (req, res, next) => {
     { new: true }
   );
 
+  console.log('Here is your updated dinner! ', updatedDay);
   res.locals.updates = updatedDay;
   return next();
 };

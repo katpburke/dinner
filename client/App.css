@@ -53,11 +53,16 @@ button {
   width: 400 px;
   height: fit-content;
   min-height: 300 px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .recipeDisplay {
   display: flex;
-  /* flex-direction: row; */
+  flex-direction: row;
+  width: fit-content;
+  max-width: 100%;
   align-items: center;
 }
 
@@ -70,6 +75,7 @@ button {
   margin: 25px;
   padding: 50px;
   border: solid black 3px;
+  border-radius: 25px;
 }
 
 .recipeName {
@@ -82,4 +88,16 @@ input[type='text'] {
   border-top-style: none;
   border-left-style: none;
   border-right-style: none;
+}
+
+select {
+  background-color: transparent;
+  border-top-style: none;
+  border-left-style: none;
+  border-right-style: none;
+  /* margin-right: 25px; */
+}
+
+.shoppingList {
+  list-style-type: none;
 }

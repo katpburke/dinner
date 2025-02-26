@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Recipe from './Recipe.jsx';
 
-function RecipeBox({ stateChange }) {
+function RecipeBox({ stateChange, refreshChange }) {
   const [displayed, displayChange] = useState(false);
   const [recipes, loadRecipes] = useState([]);
   const [seeRecipes, updateVisibleRecipes] = useState([]);
@@ -40,7 +40,11 @@ function RecipeBox({ stateChange }) {
     for (const recipe of recipes) {
       if (recipe.name !== '') {
         results.push(
-          <Recipe name={recipe.name} ingredients={recipe.ingredients} />
+          <Recipe
+            name={recipe.name}
+            ingredients={recipe.ingredients}
+            refreshChange={refreshChange}
+          />
         );
       }
       displayChange(true);

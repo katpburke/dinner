@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { AddDish, DispIngr } from './Dialogs.jsx';
 
-function Day({ dayName, dish, ingredients }) {
+function Day({ dayName, dish, ingredients, refresh }) {
   const [dishDialog, newDish] = useState(false);
   const [ingrDialog, dispIngr] = useState(false);
   const [dishName, updateDish] = useState('');
@@ -20,7 +20,7 @@ function Day({ dayName, dish, ingredients }) {
           }
         }
       });
-  }, []);
+  }, [refresh]);
 
   function clearDay() {
     console.log('it is clear as day');

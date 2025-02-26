@@ -1,11 +1,23 @@
 import { useState } from 'react';
 
-function Recipe({ name, ingredients }) {
+function Recipe({ name, ingredients, refreshChange }) {
   const [selector, updateSelector] = useState('');
   const url = 'http://localhost:3000/dinner';
+
   function commit() {
     //how to do this without the same props in daybox?
     //update the database and then refresh in the daybox end?
+    fetch(url, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        day: selector,
+        dish: name,
+        ingredients: ingredients,
+      }),
+    })
+      .then((response) => response)
+      .then(refreshChange((previous) => previous + 1));
   }
 
   return (
@@ -17,7 +29,6 @@ function Recipe({ name, ingredients }) {
         ))}
       </ul>
       <div>
-        {/* finish adding functionality here */}
         <select
           name='addDay'
           id='addDay'
@@ -32,7 +43,7 @@ function Recipe({ name, ingredients }) {
           <option value='Friday'>Friday</option>
           <option value='Saturday'>Saturday</option>
         </select>
-        <button onclick={commit}>Add</button>
+        <button onClick={commit}>Add</button>
       </div>
     </div>
   );

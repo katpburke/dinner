@@ -10,6 +10,7 @@ function App() {
   console.log('booted up!');
   const [dispRecipes, recipeChange] = useState(false);
   const [dispList, listChange] = useState(false);
+  const [refreshCount, refreshChange] = useState(0);
 
   const days = [
     'Sunday',
@@ -24,7 +25,7 @@ function App() {
   const dayBoxes = [];
 
   for (const day of days) {
-    dayBoxes.push(<Day dayName={day} />);
+    dayBoxes.push(<Day dayName={day} refresh={refreshCount} />);
   }
 
   console.log('dayboxes populated, loading app');
@@ -39,11 +40,13 @@ function App() {
             <button onClick={() => recipeChange(true)}>Recipes</button>
           </div>
           <div>
-            <button>Shopping List</button>
+            <button onClick={() => listChange(true)}>Shopping List</button>
           </div>
         </div>
       )}
-      {dispRecipes && <RecipeBox stateChange={recipeChange} />}
+      {dispRecipes && (
+        <RecipeBox stateChange={recipeChange} refreshChange={refreshChange} />
+      )}
       {dispList && <ShoppingList stateChange={listChange} />}
     </div>
   );
