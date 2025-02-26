@@ -3,6 +3,7 @@ import express from 'express';
 // const db = require('./db/dinner.js');
 import dinnerController from './controllers/dinnerController.js';
 import CORS from 'cors';
+import recipeController from './controllers/recipeController.js';
 
 const app = express();
 const PORT = 3000;
@@ -27,12 +28,30 @@ app.get('/dinner', dinnerController.getDinners, (req, res) => {
   res.status(200).json(res.locals.dinners);
 });
 
-app.post('/dinner', dinnerController.newDinner, (req, res) => {
-  res.status(200).json(res.locals.new);
+app.post(
+  '/dinner',
+  dinnerController.newDinner,
+  recipeController.newRecipe,
+  (req, res) => {
+    res.status(200).json(res.locals.new);
+  }
+);
+
+app.patch(
+  '/dinner',
+  dinnerController.updateDinner,
+  recipeController.newRecipe,
+  (req, res) => {
+    res.status(200).json(res.locals.updates);
+  }
+);
+
+app.get('/recipes/:name', recipeController.getRecipes, (req, res) => {
+  res.status(200).json(res.locals.recipes);
 });
 
-app.patch('/dinner', dinnerController.updateDinner, (req, res) => {
-  res.status(200).json(res.locals.updates);
+app.get('/recipes', recipeController.getRecipes, (req, res) => {
+  res.status(200).json(res.locals.recipes);
 });
 
 app.use((req, res) => res.status(404).send('Page not found.'));

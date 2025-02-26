@@ -24,4 +24,11 @@ const dinnerSchema = new Schema({
 
 const Dinner = mongoose.model('dinner', dinnerSchema);
 
-export default Dinner;
+const recipeSchema = new Schema({
+  name: String,
+  ingredients: [String],
+});
+
+const Recipe = mongoose.model('recipe', recipeSchema);
+
+export { Dinner, Recipe };

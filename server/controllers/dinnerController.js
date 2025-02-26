@@ -1,4 +1,4 @@
-import Dinner from '../models/dinnerModels.js';
+import { Dinner } from '../models/dinnerModels.js';
 
 const dinnerController = {};
 
@@ -8,7 +8,7 @@ dinnerController.getDinners = async (req, res, next) => {
   return next();
 };
 
-dinnerController.newDinner = (req, res, next) => {
+dinnerController.newDinner = async (req, res, next) => {
   console.log('here is your req body: ', req.body);
   const dayName = req.body.day;
   const dishName = req.body.dish;
@@ -20,9 +20,15 @@ dinnerController.newDinner = (req, res, next) => {
     ingredients: ingredientsList,
   });
   console.log('here is your dinner:', newDinner);
-  newDinner.save();
-  res.locals.new = newDinner;
-  return next();
+  const preExists = await Dinner.findOne({ day: dayName });
+  console.log('does this already exist?', preExists);
+  if (preExists) {
+    dinnerController.updateDinner(req, res, next);
+  } else {
+    newDinner.save();
+    res.locals.new = newDinner;
+    return next();
+  }
 };
 
 dinnerController.updateDinner = async (req, res, next) => {
