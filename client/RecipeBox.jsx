@@ -74,10 +74,17 @@ function RecipeBox({ stateChange, refreshChange }) {
           </div>
         </div>
       )}
-      {displayed && (
+      {displayed && seeRecipes[0] !== undefined && (
         <div>
           <h4>Here's what I found:</h4>
           <div className='recipeDisplay'>{seeRecipes}</div>
+          <button onClick={() => displayChange(false)}>Search Again</button>
+          <button onClick={() => stateChange(false)}>Close</button>
+        </div>
+      )}
+      {displayed && seeRecipes[0] === undefined && (
+        <div>
+          <h4>I'm sorry, I couldn't find any recipes using {searchName}.</h4>
           <button onClick={() => displayChange(false)}>Search Again</button>
           <button onClick={() => stateChange(false)}>Close</button>
         </div>

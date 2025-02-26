@@ -16,8 +16,12 @@ function Recipe({ name, ingredients, refreshChange }) {
         ingredients: ingredients,
       }),
     })
-      .then((response) => response)
-      .then(refreshChange((previous) => previous + 1));
+      .then(refreshChange((previous) => previous + 1))
+      .then(setInterval(console.log('time comes for us all'), 1000))
+      .then(() => {
+        console.log('refreshing again!');
+        refreshChange((previous) => previous + 1);
+      });
   }
 
   return (

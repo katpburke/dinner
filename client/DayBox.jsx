@@ -6,6 +6,7 @@ function Day({ dayName, dish, ingredients, refresh }) {
   const [ingrDialog, dispIngr] = useState(false);
   const [dishName, updateDish] = useState('');
   const [ingrList, updateIngredients] = useState(ingredients);
+  const [method, updateMethod] = useState('');
   const url = 'http://localhost:3000/dinner';
 
   useEffect(() => {

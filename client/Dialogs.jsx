@@ -58,6 +58,11 @@ function AddDish({
 
   return (
     <div>
+      <div>
+        <button className='addButton' onClick={() => updateDialogState(false)}>
+          ⨯
+        </button>
+      </div>
       <input
         type='text'
         placeholder='Dish Name'
