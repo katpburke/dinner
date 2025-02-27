@@ -14,7 +14,9 @@ function App() {
   const [dispPantry, pantryChange] = useState(false);
   const [refreshCount, refreshChange] = useState(0);
   const [pantryList, updatePantry] = useState({});
+  const [weekData, updateWeek] = useState({});
   const urlPantry = 'http://localhost:3000/pantry';
+  const urlDinner = 'http://localhost:3000/dinner';
 
   const days = [
     'Sunday',
@@ -27,16 +29,35 @@ function App() {
   ];
 
   const dayBoxes = [];
+  // const daysData = {};
 
-  for (const day of days) {
-    dayBoxes.push(<Day dayName={day} refresh={refreshCount} />);
-  }
+  // useEffect(() => {
+  //   fetch(urlDinner)
+  //     .then((response) => response.json())
+  //     .then((dbData) => {
+  //       for (let i = 0; i < dbData.length; i++) {
+  //         daysData[dbData[i].day] = {
+  //           dish: dbData[i].dish,
+  //           ingredients: dbData[i].ingredients,
+  //         };
+  //         if (refreshCount < 10) {
+  //           refreshChange(refreshCount + 1);
+  //         }
+  //       }
+  //     });
+  //   console.log('processed data here! ', daysData);
+  //   updateWeek(daysData);
+  // }, [refreshCount]);
 
   useEffect(() => {
     fetch(urlPantry)
       .then((response) => response.json())
       .then((data) => updatePantry(data));
   }, []);
+
+  for (const day of days) {
+    dayBoxes.push(<Day dayName={day} refresh={refreshCount} />);
+  }
 
   console.log('dayboxes populated, loading app');
   return (

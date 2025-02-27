@@ -64,7 +64,7 @@ button {
   width: fit-content;
   max-width: 400 px;
   flex-wrap: wrap;
-  align-items: center;
+  justify-content: center;
 }
 
 .recipe {

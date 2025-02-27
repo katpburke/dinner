@@ -23,6 +23,13 @@ function Day({ dayName, dish, ingredients, refresh }) {
       });
   }, [refresh]);
 
+  // useEffect(() => {
+  //   if (weekData[dayName]) {
+  //     updateDish(weekData[dayName].dish);
+  //     updateIngredients(weekData[dayName].ingredients);
+  //   }
+  // }, [refresh]);
+
   function clearDay() {
     console.log('it is clear as day');
     updateDish('');
